@@ -54,11 +54,11 @@ export const Search = () => {
         })
 
         const find = "";
-        
+
         if (target.name === 'all') {
             searchByTitle(find);
         } else {
-            searchByTitle(target.name);
+            searchByTitle(target.name, checkBoxs);
         }
 
 
@@ -75,9 +75,9 @@ export const Search = () => {
                         onChange={onChange}
                         value={querySearch}
                     />
-                    <div class="form-check">
+                    <div className="form-check">
                         <input
-                            class="form-check-input"
+                            className="form-check-input"
                             type="checkbox"
                             value=""
                             onChange={onChangeCheckBox}
@@ -86,15 +86,15 @@ export const Search = () => {
                             checked={all}
                         />
                         <label
-                            class="form-check-label"
-                            for="checkAll">
+                            className="form-check-label"
+                            htmlFor="checkAll">
                             Todos
                         </label>
                     </div>
 
-                    <div class="form-check">
+                    <div className="form-check">
                         <input
-                            class="form-check-input"
+                            className="form-check-input"
                             type="checkbox"
                             value=""
                             onChange={onChangeCheckBox}
@@ -103,14 +103,14 @@ export const Search = () => {
                             id="ckeckGolden" />
 
                         <label
-                            class="form-check-label"
-                            for="ckeckGolden">
+                            className="form-check-label"
+                            htmlFor="ckeckGolden">
                             Golden
                         </label>
                     </div>
-                    <div class="form-check">
+                    <div className="form-check">
                         <input
-                            class="form-check-input"
+                            className="form-check-input"
                             type="checkbox"
                             value=""
                             checked={silver}
@@ -119,14 +119,14 @@ export const Search = () => {
                             id="checkSilver" />
 
                         <label
-                            class="form-check-label"
-                            for="checkSilver">
+                            className="form-check-label"
+                            htmlFor="checkSilver">
                             Silver
                         </label>
                     </div>
-                    <div class="form-check">
+                    <div className="form-check">
                         <input
-                            class="form-check-input"
+                            className="form-check-input"
                             type="checkbox"
                             value=""
                             checked={bronze}
@@ -135,8 +135,8 @@ export const Search = () => {
                             id="checkBronce" />
 
                         <label
-                            class="form-check-label"
-                            for="checkBronce">
+                            className="form-check-label"
+                            htmlFor="checkBronce">
                             Bronce
                         </label>
                     </div>

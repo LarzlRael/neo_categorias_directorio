@@ -1,0 +1,116 @@
+.card-container {
+    box-sizing: border-box;
+    display: grid;
+    margin: auto;
+    max-width: 1200px;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    width: 90%;
+    gap: 2rem;
+
+    @include media(xs) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    @include media(sm) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    @include media(md) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+.card-product {
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: "roboto";
+    padding: 1.5rem;
+
+    &.active {
+        transform: scale(1.2);
+    }
+
+    .title {
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        text-transform: uppercase;
+        h3 {
+            font-family: "Raleway";
+            color: transparentize($color: #000000, $amount: 0.4);
+            font-size: 2.3rem;
+            font-weight: 800;
+        }
+        img {
+            width: 50px;
+            height: 50px;
+
+            
+        }
+    }
+    .desc {
+        font-size: 0.9rem;
+        color: transparentize($color: #000000, $amount: 0.5);
+    }
+    .benefits {
+        margin: 20px 0;
+        ul {
+            li {
+                margin: 8px 0px;
+            }
+        }
+    }
+    .button-container {
+        width: 100%;
+        padding: 0 30px;
+
+        .order-now {
+            border: 0.5px solid black;
+
+            border-radius: 5px;
+            padding: 10px 20px;
+            width: 100%;
+            margin: auto;
+            transition: 0.3s ease all;
+            &:hover {
+                background: lighten($color: black, $amount: 20);
+                color: white;
+            }
+        }
+    }
+}
+
+.card-header-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+i {
+    margin-right: 12px;
+    font-size: 1.2rem;
+    color: black;
+}
+
+.golden-card {
+    background: rgb(96, 94, 94);
+    background: linear-gradient(135deg, rgba(96, 94, 94, 1) -10%, rgba(241, 217, 133, 1) 47%, rgba(96, 94, 94, 1) 100%);
+}
+
+.silver-card {
+    background: rgb(96, 94, 94);
+    background: linear-gradient(135deg, rgba(96, 94, 94, 1) -10%, rgba(215, 219, 220, 1) 47%, rgba(96, 94, 94, 1) 100%);
+}
+.bronze-card {
+    background: rgb(176, 171, 171);
+    background: linear-gradient(
+        135deg,
+        rgba(176, 171, 171, 1) 7%,
+        rgba(255, 255, 255, 1) 41%,
+        rgba(228, 201, 184, 1) 68%,
+        rgba(130, 107, 91, 1) 94%
+    );
+}
+
+
+

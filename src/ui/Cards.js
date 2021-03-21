@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { SearchContext } from '../context/SearchContext';
 
 
@@ -9,19 +9,20 @@ export const Cards = () => {
     const { cards_s, getCards } = useContext(SearchContext);
 
     useEffect(() => {
-        getCards()
+        getCards();
+        // eslint-disable-next-line
     }, [])
 
     return (
-        <div className="row">
+        <div className="card-container">
             {cards_s.map(card => (
-                <div className="col-md-3">
-                    <Card
-                        card={card}
-                        key={card.id}
 
-                    />
-                </div>
+                <Card
+                    card={card}
+                    key={card.id}
+
+                />
+
             ))}
             {cards_s.length === 0 && <h2>No se encontraron resultados</h2>}
         </div>
@@ -31,11 +32,11 @@ export const Cards = () => {
 
 const Card = ({ card: { title, content, className, benefits } }) => {
 
-    const [check, setCheck] = useState(false);
+    // const [check, setCheck] = useState(false);
 
-    const handleCheck = () => {
-        setCheck(!check);
-    }
+    // const handleCheck = () => {
+    //     setCheck(!check);
+    // }
     return (
 
         <div
@@ -56,7 +57,7 @@ const Card = ({ card: { title, content, className, benefits } }) => {
                     <li><i class="fas fa-times-circle"></i>Lorem, ipsum dolor.</li>
                     <li><i class="fas fa-times-circle"></i>Lorem, ipsum dolor.</li> */}
                     {benefits.map((benefit, i) => (
-                        <li><i className="fas fa-times-circle"></i>{benefit}</li>
+                        <li key={i}><i className="fas fa-times-circle"></i>{benefit}</li>
                     ))}
                 </ul>
 

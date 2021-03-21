@@ -17,8 +17,9 @@ const SearchState = (props) => {
     //? crear  el distpach y el state
     const [state, dispatch] = useReducer(searchReducer, initialState);
 
-    const searchByTitle = (query = "") => {
+    const searchByTitle = (query = "", statusCheck = {}) => {
 
+        console.log(statusCheck)
 
         if (query === '') {
 
@@ -29,11 +30,11 @@ const SearchState = (props) => {
         };
 
         query = query.toLowerCase();
+
         const cardFilter = cardData.filter(card =>
             (card.title.toLowerCase().includes(query)) ||
             (card.content.toLowerCase().includes(query)) ||
             (card.benefits[0].toLowerCase().includes(query))
-
         );
 
 
