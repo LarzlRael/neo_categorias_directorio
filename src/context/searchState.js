@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react';
 import { cardData } from '../data/card-info';
+import { getCardsByCategory } from '../search/searchCardByTitle';
 import { types } from '../types/types';
 import { SearchContext } from './SearchContext';
 
@@ -17,9 +18,8 @@ const SearchState = (props) => {
     //? crear  el distpach y el state
     const [state, dispatch] = useReducer(searchReducer, initialState);
 
-    const searchByTitle = (query = "", statusCheck = {}) => {
+    const searchByTitle = (query = "") => {
 
-        console.log(statusCheck)
 
         if (query === '') {
 
@@ -30,18 +30,67 @@ const SearchState = (props) => {
         };
 
         query = query.toLowerCase();
+        let cardFilter = [];
 
-        const cardFilter = cardData.filter(card =>
+
+        cardFilter = cardData.filter(card =>
             (card.title.toLowerCase().includes(query)) ||
             (card.content.toLowerCase().includes(query)) ||
             (card.benefits[0].toLowerCase().includes(query))
-        );
+
+
+        )
 
 
         dispatch({
             type: types.search,
             payload: cardFilter
         })
+
+    }
+
+    const searchByCategory = (category) => {
+
+        let items;
+
+        if (category.golden !== undefined
+            || category.silver !== undefined
+            || category.bronze !== undefined) {
+
+
+
+            if (category.golden) {
+                items = getCardsByCategory('golden')
+            }
+            if (category.silver) {
+                items = getCardsByCategory('silver')
+            }
+            if (category.bronze) {
+                items = getCardsByCategory('bronze')
+            }
+
+            if (category.golden && category.silver) {
+                items = getCardsByCategory('golden', 'silver')
+            }
+            if (category.golden && category.bronze) {
+                items = getCardsByCategory('golden', 'bronze')
+            }
+            if (category.silver && category.bronze) {
+                items = getCardsByCategory('silver', 'bronze')
+            }
+            if (category.silver && category.bronze) {
+                items = getCardsByCategory('silver', 'bronze', 'golden')
+            }
+        }
+
+
+        if (items !== undefined) {
+
+            dispatch({
+                type: types.search,
+                payload: items
+            })
+        }
 
     }
     const getCards = () => {
@@ -58,11 +107,12 @@ const SearchState = (props) => {
         <SearchContext.Provider
             value={{
                 //? states
-                cards_s: state.cards_s,
+                ...state,
 
                 //* funciones
                 searchByTitle,
-                getCards
+                getCards,
+                searchByCategory
 
             }}
         >

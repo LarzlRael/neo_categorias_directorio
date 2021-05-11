@@ -2,20 +2,23 @@ import React, { useContext, useState } from 'react'
 import { SearchContext } from '../context/SearchContext';
 
 
+
+const initialState = {
+    all: true,
+    golden: false,
+    silver: false,
+    bronze: false,
+}
+
 export const Search = () => {
 
-    const { searchByTitle } = useContext(SearchContext);
+    const { searchByTitle, searchByCategory } = useContext(SearchContext);
 
 
     const [query, setQuery] = useState({
         querySearch: ""
     });
-    const [checkBoxs, setCheckBoxs] = useState({
-        all: true,
-        golden: false,
-        silver: false,
-        bronze: false,
-    });
+    const [checkBoxs, setCheckBoxs] = useState(initialState);
 
     const { all, golden, silver, bronze } = checkBoxs;
 
@@ -26,6 +29,7 @@ export const Search = () => {
         searchByTitle(querySearch);
     }
     const onChange = ({ target }) => {
+
 
         setCheckBoxs({
             all: false,
@@ -40,26 +44,31 @@ export const Search = () => {
         })
     }
 
-    const onChangeCheckBox = ({ target }) => {
+    const onChangeCheckBox = ({ target: { name, checked } }) => {
 
         setQuery({
             ...query,
             querySearch: ''
         })
 
+        if (name === 'all') {
 
-        setCheckBoxs({
-            ...checkBoxs,
-            [target.name]: target.checked
-        })
+            searchByTitle("");
 
-        const find = "";
-
-        if (target.name === 'all') {
-            searchByTitle(find);
+            setCheckBoxs(initialState);
+            
         } else {
-            searchByTitle(target.name, checkBoxs);
+            setCheckBoxs({
+                ...checkBoxs,
+                all: false,
+                [name]: checked
+            })
         }
+
+        
+        searchByCategory(checkBoxs);
+
+
 
 
     }

@@ -9,6 +9,7 @@ const reducer = (state, action) => {
                 cards_s: action.payload
             }
         case types.search:
+            
             return {
                 ...state,
                 cards_s: action.payload

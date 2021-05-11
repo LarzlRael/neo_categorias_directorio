@@ -10,4 +10,18 @@ export const getCardByTitle = (title = '') => {
 
     title = title.toLowerCase();
     return cardData.filter(card => card.title.toLowerCase().includes(title));
+
+}
+export const getCardsByCategory = (...categorias) => {
+
+    let [primero, segundo, tercer] = categorias
+
+    if (tercer) {
+        return cardData;
+    }
+
+    return cardData.filter(card => (card.title.toLowerCase().includes(primero))
+        || (card.title.toLowerCase().includes(segundo))
+
+    );
 }
