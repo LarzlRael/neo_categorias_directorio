@@ -1,16 +1,21 @@
+
+
 import React, { useReducer } from 'react';
 import { cardData } from '../data/card-info';
-import { getCardsByCategory } from '../search/searchCardByTitle';
+import { getCardsByCategory } from '../helpers/searchCardByTitle';
 import { types } from '../types/types';
 import { SearchContext } from './SearchContext';
 
 //? context
+
+
 
 import searchReducer from './SearchReducer';
 
 const initialState = {
     cards_s: [],
     card_search: [],
+    menuStatus: false
 }
 
 const SearchState = (props) => {
@@ -37,10 +42,7 @@ const SearchState = (props) => {
             (card.title.toLowerCase().includes(query)) ||
             (card.content.toLowerCase().includes(query)) ||
             (card.benefits[0].toLowerCase().includes(query))
-
-
         )
-
 
         dispatch({
             type: types.search,
@@ -78,7 +80,7 @@ const SearchState = (props) => {
             if (category.silver && category.bronze) {
                 items = getCardsByCategory('silver', 'bronze')
             }
-            if (category.silver && category.bronze) {
+            if (category.silver && category.bronze && category.golden) {
                 items = getCardsByCategory('silver', 'bronze', 'golden')
             }
         }
@@ -102,7 +104,18 @@ const SearchState = (props) => {
 
     }
 
+    const showMenu = () => {
 
+        dispatch({
+            type: types.showMenu,
+        })
+    }
+    const hideMenu = () => {
+
+        dispatch({
+            type: types.hideMenu,
+        })
+    }
     return (
         <SearchContext.Provider
             value={{
@@ -112,8 +125,9 @@ const SearchState = (props) => {
                 //* funciones
                 searchByTitle,
                 getCards,
-                searchByCategory
-
+                searchByCategory,
+                showMenu,
+                hideMenu,
             }}
         >
             {props.children}

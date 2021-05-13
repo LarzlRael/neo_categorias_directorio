@@ -30,7 +30,6 @@ export const Search = () => {
     }
     const onChange = ({ target }) => {
 
-
         setCheckBoxs({
             all: false,
             golden: false,
@@ -44,7 +43,11 @@ export const Search = () => {
         })
     }
 
-    const onChangeCheckBox = ({ target: { name, checked } }) => {
+    const onChangeCheckBox = (e) => {
+
+        e.preventDefault();
+
+        const { target: { name } } = e;
 
         setQuery({
             ...query,
@@ -56,39 +59,47 @@ export const Search = () => {
             searchByTitle("");
 
             setCheckBoxs(initialState);
-            
+
         } else {
             setCheckBoxs({
                 ...checkBoxs,
                 all: false,
-                [name]: checked
+                [name]: !checkBoxs[name]
             })
         }
 
-        
+
         searchByCategory(checkBoxs);
 
-
-
-
     }
+
+
     return (
         <form onSubmit={handleSubmit}>
-            <div className="">
-                <div className="form-group">
+
+            <div className="searchBox">
+
+                <div className="form-group ">
+                    <label htmlFor="buscar">Buscar elemento</label>
                     <input type="text"
-                        className="form-control input-size"
-                        placeholder="Search ..."
+                        className="form-control"
+                        placeholder="Buscar ..."
                         name="querySearch"
                         autoComplete="off"
                         onChange={onChange}
                         value={querySearch}
+                        id="buscar"
                     />
+
+                </div>
+
+                <div className="form-group">
+
                     <div className="form-check">
                         <input
                             className="form-check-input"
                             type="checkbox"
-                            value=""
+
                             onChange={onChangeCheckBox}
                             name="all"
                             id="checkAll"
@@ -105,7 +116,7 @@ export const Search = () => {
                         <input
                             className="form-check-input"
                             type="checkbox"
-                            value=""
+
                             onChange={onChangeCheckBox}
                             name="golden"
                             checked={golden}
@@ -121,7 +132,7 @@ export const Search = () => {
                         <input
                             className="form-check-input"
                             type="checkbox"
-                            value=""
+
                             checked={silver}
                             onChange={onChangeCheckBox}
                             name="silver"
@@ -137,7 +148,7 @@ export const Search = () => {
                         <input
                             className="form-check-input"
                             type="checkbox"
-                            value=""
+
                             checked={bronze}
                             onChange={onChangeCheckBox}
                             name="bronze"

@@ -1,0 +1,28 @@
+.showOrHide {
+    display: none;
+    @include media(sm) {
+        display: inline-block;
+    }
+}
+.menu-navigator {
+    width: 75%;
+    z-index: 100;
+    transition: 0.4s ease all;
+    height: 100vh;
+    position: absolute;
+    background-color: rgba(72, 132, 168, 1);
+
+
+    @include media(sm) {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.open-menu {
+    // display: grid;
+    transform: translate(-150%);
+}
+.close-menu {
+    transform: translate(0%);
+}

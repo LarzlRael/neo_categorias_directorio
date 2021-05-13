@@ -9,10 +9,20 @@ const reducer = (state, action) => {
                 cards_s: action.payload
             }
         case types.search:
-            
+
             return {
                 ...state,
                 cards_s: action.payload
+            }
+        case types.showMenu:
+            return {
+                ...state,
+                menuStatus: true
+            }
+        case types.hideMenu:
+            return {
+                ...state,
+                menuStatus: false
             }
 
         default:

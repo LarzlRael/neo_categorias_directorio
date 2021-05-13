@@ -16,12 +16,29 @@ export const getCardsByCategory = (...categorias) => {
 
     let [primero, segundo, tercer] = categorias
 
-    if (tercer) {
-        return cardData;
+    
+    function compare(a, b) {
+        if (a.className < b.className) {
+            return -1;
+        }
+        if (a.className > b.className) {
+            return 1;
+        }
+        return 0;
     }
 
-    return cardData.filter(card => (card.title.toLowerCase().includes(primero))
+
+    if (tercer) {
+        
+        return cardData.sort(compare);
+    }
+
+    const filter = cardData.filter(card =>
+        (card.title.toLowerCase().includes(primero))
         || (card.title.toLowerCase().includes(segundo))
 
-    );
+    )
+        .sort((a, b) => (a.title > b.title ? 1 : -1))
+
+    return filter;
 }
